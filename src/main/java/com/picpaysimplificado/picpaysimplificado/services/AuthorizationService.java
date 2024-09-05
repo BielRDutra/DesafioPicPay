@@ -1,5 +1,6 @@
 package com.picpaysimplificado.picpaysimplificado.services;
 
+
 import java.math.BigDecimal;
 import java.util.Map;
 
@@ -11,16 +12,12 @@ import org.springframework.web.client.RestTemplate;
 
 import com.picpaysimplificado.picpaysimplificado.domain.user.User;
 
-import lombok.Value;
-
 
 @Service
 public class AuthorizationService {
-    
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${app.authorizationApi}")
     private String authApiUrl;
 
     public boolean authorizeTransaction(User sender, BigDecimal value){
@@ -28,6 +25,7 @@ public class AuthorizationService {
         ResponseEntity<Map> authorizationResponse = restTemplate.getForEntity(this.authApiUrl, Map.class);
 
         if(authorizationResponse.getStatusCode() == HttpStatus.OK){
+            @SuppressWarnings("null")
             String message = (String) authorizationResponse.getBody().get("message");
             return "Autorizado".equalsIgnoreCase(message);
         } else return false;

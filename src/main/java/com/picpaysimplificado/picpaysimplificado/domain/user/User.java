@@ -18,8 +18,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name="users")
-@Table(name="users")
+@Entity(name="users") /*São as colunas que terá no banco de dados */
+@Table(name="users") 
 @Getter
 @Setter
 @NoArgsConstructor
